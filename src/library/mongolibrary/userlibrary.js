@@ -5,13 +5,13 @@ const { response } = require('express');
 const { result } = require('underscore');
 // const { set } = require('mongoose');
 
-let insertCollection =  (tableName) => {
+let insertCollection = (tableName) => {
     return new Promise((resolve, reject) => {
         let query = tableName.save();
         query.then(result => {
             resolve(result);
         }).catch(error => {
-            console.log('errorsdsdsds',error);
+            console.log('errorsdsdsds', error);
             reject(error);
         })
     })
@@ -28,23 +28,26 @@ let simpleselect = function (tableName, where) {
         })
     })
 }
-let commonselectquery = function (tablename) {
+let commonselectquery =  function (tablename, skip, limit) {
+    console.log('skip value', skip, limit);
     return new Promise((resolve, reject) => {
-        let query = tablename.find();
+        let query = tablename.find().skip(skip).limit(limit);
         query.then(result => {
             resolve(result);
         }).catch(error => {
+            console.log('error', error);
             reject(error);
         })
     })
 }
 
 let updatecollection = function (tablename, updateData, setData) {
-    console.log('tablename',tablename,updateData,setData);
+    console.log('tablename', tablename, updateData, setData);
     return new Promise((resolve, reject) => {
         let query;
-        if(updateData) {
+        if (updateData) {
             query = tablename.updateOne(updateData, { $set: setData });
+            console.log(query)
         } else {
             query = tablename.updateMany(updateData, { $set: setData });
         }
@@ -52,6 +55,7 @@ let updatecollection = function (tablename, updateData, setData) {
         query.then(result => {
             resolve(result);
         }).catch(error => {
+            console.log('error', error)
             reject(error);
         })
     })

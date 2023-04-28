@@ -27,7 +27,7 @@ module.exports.signup = async (request, response) => {
                     data: null
                 })
             } else {
-                 userlibrary
+                userlibrary
                     .insertCollection(user)
                     .then((resp) => {
                         response.status(200).json({
@@ -173,15 +173,16 @@ module.exports.filepath = (req, res) => {
 };
 
 
-module.exports.getuserData = async (request,response) =>{
-    userlibrary.commonselectquery(User).then(result =>{
-      response.status(200).json({
-        status:200,
-        statusCode:200,
-        data:result
-      })
-    }).catch(err =>{
-        console.log('error value list',err);
+module.exports.getuserData = async (request, response) => {
+    userlibrary.commonselectquery(User).then(result => {
+        response.status(200).json({
+            status: 200,
+            statusCode: 200,
+            message: 'Data Fetched',
+            data: result,
+        })
+    }).catch(err => {
+        console.log('error value list', err);
         response.status(200).json({
             statusCode: 500,
             success: false,

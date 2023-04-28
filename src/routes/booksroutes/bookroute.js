@@ -14,7 +14,10 @@ router.post('/updatebook', addbooks.updatebook);
 
 router.post('/filepath', authController.filepath);
 router.get('/getuserdata', authController.getuserData);
-router.post('/studentRegistation',student.insertStudent)
+router.post('/studentRegistation', student.insertStudent);
+router.post('/studentData', student.getStudentData);
+router.put('/updatestudent', student.updatestudentStudent);
+router.delete('/deletestudent/:id', student.deleteStudentData);
 
 
 module.exports = router;
